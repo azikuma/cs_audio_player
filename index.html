@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>AudioPlayer</title>
+
+        <!-- アドレスバー等のブラウザのUIを非表示 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- ホーム画面に表示されるアプリ名 -->
+    <meta name="cs_audio_player" content="AudioPlayer">
+</head>
+<body>
+    <div id="controls">
+        <input type="file" id="audioFile"/><br>
+        <div id="ctime">0:00</div><br>
+        <button id="prev">&lt;&lt;10</button>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+        <button id="next">10&gt;&gt;</button>
+        <script src="./player.js"></script>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+              .then((reg) => {
+                console.log('Service worker registered.', reg);
+              });
+        }
+    </script>
+    <script type="text/javascript" src="player.js"></script>
+    <script type="text/javascript" src="sw.js"></script>
+</body>
+</html>

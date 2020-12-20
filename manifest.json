@@ -1,0 +1,17 @@
+{
+    "name" : "AudioPlayer",
+    "short_name" : "AudioPlayer",
+    "icons" : [{
+        "src": "/icons/aup.png",
+        "sizes": "192*192",
+        "type": "image/png"
+    }, {
+        "src": "/icons/aup_512.png",
+        "sizes": "512*512",
+        "type":"image/png"
+    }],
+    "start_url": "/index.html?utm_sourcc=homescreen",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF"
+}
