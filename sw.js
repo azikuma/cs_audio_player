@@ -1,62 +1,75 @@
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-      caches.open('cache-v1')
-        .then(function(cache) {
-          return cache.addAll([
-            '/',
-            'index.html',
-            'player.js',
-            'styles.css',
-            'app.js',
-            'aup.png'
-          ]);
-        })
-    );
-  });
-  
-  self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-          // キャッシュがあったのでレスポンスを返す
-          if (response) {
+const CACHE_VERSION = 'v1';
+const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
+
+// キャッシュするファイルをセットする
+const urlsToCache = [
+  '.',
+  'css/styles.css',
+  'img/aup.png',
+  'js/player.js'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    // キャッシュを開く
+    caches.open(CACHE_NAME)
+    .then((cache) => {
+      // 指定されたファイルをキャッシュに追加する
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return cacheNames.filter((cacheName) => {
+        // このスコープに所属していて且つCACHE_NAMEではないキャッシュを探す
+        return cacheName.startsWith(`${registration.scope}!`) &&
+               cacheName !== CACHE_NAME;
+      });
+    }).then((cachesToDelete) => {
+      return Promise.all(cachesToDelete.map((cacheName) => {
+        // いらないキャッシュを削除する
+        return caches.delete(cacheName);
+      }));
+    })
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+    .then((response) => {
+      // キャッシュ内に該当レスポンスがあれば、それを返す
+      if (response) {
+        return response;
+      }
+
+      // 重要：リクエストを clone する。リクエストは Stream なので
+      // 一度しか処理できない。ここではキャッシュ用、fetch 用と2回
+      // 必要なので、リクエストは clone しないといけない
+      let fetchRequest = event.request.clone();
+
+      return fetch(fetchRequest)
+        .then((response) => {
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            // キャッシュする必要のないタイプのレスポンスならそのまま返す
             return response;
           }
-          // キャッシュがなかったので通常の fetch を行う
-          // 重要：リクエストはストリームであり、1度しか読み取れないため複製します。
-          // ブラウザーのフェッチに加え、キャッシュで使用するため2つ必要になります。
-          var fetchRequest = event.request.clone();
-          return fetch(fetchRequest)
-            .then(
-              function(response) {
-                // 有効な応答を受信したかどうかを確認します
-                if(!response || response.status !== 200 || response.type !== 'basic') {
-                  return response;
-                }
-                // 有効な応答を受信したようなので、キャッシュに追加していきます。
-                // 重要：リクエストと同様の理由により、レスポンスも複製します。
-                var responseToCache = response.clone();
-                caches.open('cache-v1')
-                  .then(function(cache) {
-                    cache.put(event.request, responseToCache);
-                  });
-                  return response;
-              }
-            );
-          }
-        )
-    );
-  });
-  
-  self.addEventListener('activate', function(event) {
-    var cacheKeeplist = ['cache-v2'];
-    event.waitUntil(
-      caches.keys().then(function(keyList) {
-        return Promise.all(keyList.map(function(key) {
-          if (cacheKeeplist.indexOf(key) === -1) {
-            return caches.delete(key);
-          }
-        }));
-      })
-    );
-  });
+
+          // 重要：レスポンスを clone する。レスポンスは Stream で
+          // ブラウザ用とキャッシュ用の2回必要。なので clone して
+          // 2つの Stream があるようにする
+          let responseToCache = response.clone();
+
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+
+          return response;
+        });
+    })
+  );
+});
