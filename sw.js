@@ -5,7 +5,7 @@ const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 const urlsToCache = [
   '.',
   'css/styles.css',
-  'img/aup.png',
+  'audio.png',
   'js/player.js'
 ];
 
