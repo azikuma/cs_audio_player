@@ -6,7 +6,7 @@ const urlsToCache = [
   '.',
   'css/styles.css',
   'music.png',
-  'player.js'
+  'js/player.js'
 ];
 
 self.addEventListener('install', (event) => {
