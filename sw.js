@@ -5,8 +5,8 @@ const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 const urlsToCache = [
   '.',
   'css/styles.css',
-  'audio.png',
-  'js/player.js'
+  'music.png',
+  'player.js'
 ];
 
 self.addEventListener('install', (event) => {
