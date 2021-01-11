@@ -16,23 +16,31 @@
     <meta name="cs_audio_player" content="AudioPlayer">
 </head>
 <body>
-    <div id="controls">
-        <input type="file" id="audioFile"/><br>
-        <div id="stime">0:00</div>
-        <div id="ttime">0:00</div>
-        <input type="range" id="seekbar" value="0"><br>
-        <input type="range" id="seek" value="0" oninput="corectCurrentTime(value)"><br>
-        <button id="prev">&lt;&lt;10</button>
-        <button id="start">Start</button>
-        <button id="pause">Pause</button>
-        <button id="stop">Stop</button>
-        <button id="next">10&gt;&gt;</button><br>
-        <button id="toubai">1</button>
-        <button id="tengo">1.5</button>
-        <button id="nibai">2</button>
-        <div id="snum">0</div>
-    </div>
+  <h2>プレイリスト</h2>
+  <input type="file" id="audioFiles" multiple/> <!--複数のファイルを読み込む場合-->
+  <div id="controls">
+    <h2>一曲</h2>
+    <input type="file" id="audioFile"/><br>
 
+    <div id="stime">0:00</div>
+    <div id="ttime">0:00</div>
+
+    <input type="range" id="seekbar" value="0"><br>
+    <input type="range" id="seek" value="0" oninput="corectCurrentTime(value)"><br>
+
+    <button id="prev">&lt;&lt;10</button>
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="stop">Stop</button>
+    <button id="next">10&gt;&gt;</button><br>
+
+    <button id="toubai">1</button>
+    <button id="tengo">1.5</button>
+    <button id="nibai">2</button>
+    <div id="snum">0</div>
+
+    <div id="playListArea"></div>
+</div>
     
     
     <script type="text/javascript" src="js/player.js"></script>
