@@ -9,8 +9,9 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/path/to/index.html",
-    "display": "fullscreen",
+    "start_url": "/",
+    "display": "standalone",
     "theme_color": "#dff0d8",
     "background_color": "#dff0d8"
 }
+
