@@ -149,37 +149,30 @@ audioElms.addEventListener('ended', () => {
 })
 
 
-
-
-
-
-
-
-
-
     start.addEventListener('click', () => {
-        audioElm.play();
+        // audioElm.play();
 
-        audioElm.addEventListener('timeupdate', () => {
-            let ac = audioElm.currentTime;
-            seekbar.value = ac;
-            let sec = '0' + Math.floor(ac % 60);
-            let min = '0' + Math.floor(ac / 60);
-            sec = sec.substr(sec.length-2, 2);
-            // min = min.substr(min.length-2, 2);
-            min = min.substr(1);
+        // audioElm.addEventListener('timeupdate', () => {
+        //     let ac = audioElm.currentTime;
+        //     seekbar.value = ac;
+        //     let sec = '0' + Math.floor(ac % 60);
+        //     let min = '0' + Math.floor(ac / 60);
+        //     sec = sec.substr(sec.length-2, 2);
+        //     // min = min.substr(min.length-2, 2);
+        //     min = min.substr(1);
     
-            let ad = audioElm.duration;
-            seekbar.max = Math.floor(ad);
-            let totalSec = '0' + Math.floor(ad % 60);
-            let totalMin = '0' + Math.floor(ad / 60);
-            totalSec = totalSec.substr(totalSec.length-2, 2);
-            // totalMin = totalMin.substr(totalMin.length-2, 2);
-            totalMin = totalMin.substr(1);
+        //     let ad = audioElm.duration;
+        //     seekbar.max = Math.floor(ad);
+        //     let totalSec = '0' + Math.floor(ad % 60);
+        //     let totalMin = '0' + Math.floor(ad / 60);
+        //     totalSec = totalSec.substr(totalSec.length-2, 2);
+        //     // totalMin = totalMin.substr(totalMin.length-2, 2);
+        //     totalMin = totalMin.substr(1);
             
-            stime.innerHTML = min + ":" + sec;
-            ttime.innerHTML = totalMin + ":" + totalSec; 
-        }, true)
+        //     stime.innerHTML = min + ":" + sec;
+        //     ttime.innerHTML = totalMin + ":" + totalSec; 
+        // }, true)
+        audioElmStart();
 
         audioElms.play()
         audioElms.addEventListener('timeupdate', () => {
@@ -203,6 +196,31 @@ audioElms.addEventListener('ended', () => {
             ttime.innerHTML = totalMin + ":" + totalSec; 
         }, true)
     }, false)
+
+    const audioElmStart = () => {
+        audioElm.play();
+
+        audioElm.addEventListener('timeupdate', () => {
+            let ac = audioElm.currentTime;
+            seekbar.value = ac;
+            let sec = '0' + Math.floor(ac % 60);
+            let min = '0' + Math.floor(ac / 60);
+            sec = sec.substr(sec.length-2, 2);
+            // min = min.substr(min.length-2, 2);
+            min = min.substr(1);
+    
+            let ad = audioElm.duration;
+            seekbar.max = Math.floor(ad);
+            let totalSec = '0' + Math.floor(ad % 60);
+            let totalMin = '0' + Math.floor(ad / 60);
+            totalSec = totalSec.substr(totalSec.length-2, 2);
+            // totalMin = totalMin.substr(totalMin.length-2, 2);
+            totalMin = totalMin.substr(1);
+            
+            stime.innerHTML = min + ":" + sec;
+            ttime.innerHTML = totalMin + ":" + totalSec; 
+        }, true)
+    }
     
     pause.addEventListener('click', () => {
         audioElm.pause();
@@ -215,9 +233,8 @@ audioElms.addEventListener('ended', () => {
         audioElm.currentTime = 0;
         audioElms.currentTime = 0;
     }, false)
-    
-    
-    
+
+
     prev.addEventListener('click', () => {
         audioElm.currentTime -= 10;
         audioElms.currentTime -= 10;
@@ -242,13 +259,38 @@ audioElms.addEventListener('ended', () => {
         audioElm.playbackRate = 2;
         audioElms.playbackRate = 2;
     }, false)
+
+
+    seekbar.addEventListener('input', e => {
+        audioElm.pause();
+        audioElm.currentTime = seekbar.value;
+    });
+
+    seekbar.addEventListener('change', e => {
+        audioElm.play();
+
+        audioElm.addEventListener('timeupdate', () => {
+            let ac = audioElm.currentTime;
+            seekbar.value = ac;
+            let sec = '0' + Math.floor(ac % 60);
+            let min = '0' + Math.floor(ac / 60);
+            sec = sec.substr(sec.length-2, 2);
+            // min = min.substr(min.length-2, 2);
+            min = min.substr(1);
     
-    
-    function corectCurrentTime(v) {
-        snum.innerHTML = v;
-        audioElm.currentTime = v.toInt();
-        audioElms.currentTime = v.toInt();
-    }
+            let ad = audioElm.duration;
+            seekbar.max = Math.floor(ad);
+            let totalSec = '0' + Math.floor(ad % 60);
+            let totalMin = '0' + Math.floor(ad / 60);
+            totalSec = totalSec.substr(totalSec.length-2, 2);
+            // totalMin = totalMin.substr(totalMin.length-2, 2);
+            totalMin = totalMin.substr(1);
+            
+            stime.innerHTML = min + ":" + sec;
+            ttime.innerHTML = totalMin + ":" + totalSec; 
+        }, true)
+    })
+
 
 
 
