@@ -7,15 +7,29 @@
     width: 100%;
 }
 
+#music-select{
+    text-align: center;
+    background-color: rgb(127, 234, 255);
+}
+
 #seekbar {
     width: 100%;
 }
 
-#buttons{
-   
+#time-buttons{
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#speed-buttons{
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .times {
+    padding-top: 10px;
     position: relative;
     width: 100%;
 }

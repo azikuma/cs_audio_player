@@ -18,11 +18,15 @@
 <body>
   <div id="container">
     <div id="control">
-      <h2>プレイリスト</h2>
-      <input type="file" id="audioFiles" multiple/> <!--複数のファイルを読み込む場合-->
-      
-      <h2>一曲</h2>
-      <input type="file" id="audioFile"/><br>
+
+      <div id="music-select">
+        <h2>プレイリスト</h2>
+        <input type="file" id="audioFiles" multiple/> <!--複数のファイルを読み込む場合-->
+        
+        <h2>一曲</h2>
+        <input type="file" id="audioFile"/><br>
+
+      </div>
   
       <div class="times">
         <div id="stime">0:00</div>
@@ -31,19 +35,20 @@
       <br>
       <input type="range" id="seekbar" value="0"><br>
       
-      <div id="buttons">
+      <div id="time-buttons">
         <button id="prev">&lt;&lt;10</button>
         <button id="start">Start</button>
         <button id="pause">Pause</button>
         <button id="stop">Stop</button>
         <button id="next">10&gt;&gt;</button><br>
-    
-        
       </div>
-      <button id="toubai">1</button>
-      <button id="tengo">1.5</button>
-      <button id="nibai">2</button>
-      <div id="snum">0</div>
+      <div id="speed-buttons">
+        <button id="toubai">1</button>
+        <button id="tengo">1.5</button>
+        <button id="nibai">2</button>
+        <!-- <div id="snum">0</div> -->
+
+      </div>
   
       <div id="playListArea"></div>
       
