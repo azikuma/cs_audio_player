@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <title>AudioPlayer</title>
+
+        <!-- アドレスバー等のブラウザのUIを非表示 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- ホーム画面に表示されるアプリ名 -->
+    <meta name="cs_audio_player" content="AudioPlayer">
+</head>
+<body>
+  <div id="container">
+    <div id="control">
+      <h2>プレイリスト</h2>
+      <input type="file" id="audioFiles" multiple/> <!--複数のファイルを読み込む場合-->
+      
+      <h2>一曲</h2>
+      <input type="file" id="audioFile"/><br>
+  
+      <div class="times">
+        <div id="stime">0:00</div>
+        <div id="ttime">0:00</div>
+      </div>
+      <br>
+      <input type="range" id="seekbar" value="0"><br>
+      
+      <div id="buttons">
+        <button id="prev">&lt;&lt;10</button>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+        <button id="next">10&gt;&gt;</button><br>
+    
+        
+      </div>
+      <button id="toubai">1</button>
+      <button id="tengo">1.5</button>
+      <button id="nibai">2</button>
+      <div id="snum">0</div>
+  
+      <div id="playListArea"></div>
+      
+    </div>
+  </div>
+    
+    
+    <script type="text/javascript" src="js/player.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('sw.js').then(function(registration) {
+            // 登録成功
+            console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+          }).catch(function(err) {
+            // 登録失敗
+            console.log('ServiceWorker の登録に失敗しました。', err);
+          });
+        }
+    </script>
+</body>
+</html>

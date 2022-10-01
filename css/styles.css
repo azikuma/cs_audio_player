@@ -1,0 +1,31 @@
+#container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+#control {
+    width: 100%;
+}
+
+#seekbar {
+    width: 100%;
+}
+
+#buttons{
+   
+}
+
+.times {
+    position: relative;
+    width: 100%;
+}
+
+.times #stime {
+    position: absolute;
+    left: 0;
+}
+
+.times #ttime {
+    position: absolute;
+    right: 0;
+}

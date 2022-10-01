@@ -1,0 +1,17 @@
+{
+    "name": "AudioPlayer",
+    "short_name": "AudioPlayer",
+    "description": "audio player",
+    "icons": [
+        {
+            "src": "music.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#dff0d8",
+    "background_color": "#dff0d8"
+}
+
